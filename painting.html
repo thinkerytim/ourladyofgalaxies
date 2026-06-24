@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Painting — Our Lady of the Galaxies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:      #060810;
+      --gold:      #C9A84C;
+      --gold-dim:  #8a6f2e;
+      --parchment: #F0EAD6;
+      --silver:    #E8EAF0;
+      --silver-dim:#9aa0b8;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--deep);
+      color: var(--silver);
+      font-family: 'Raleway', sans-serif;
+    }
+
+    canvas#stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      gap: 0;
+    }
+
+    /* ── Painting ── */
+    /* The photograph has a black background that blends into the page.
+       We let it breathe as large as the viewport allows, with a
+       gentle gold glow to honor the carved frame. */
+    .painting-img {
+      display: block;
+      /* Constrain by both height and width so it always fits on screen */
+      max-height: 78vh;
+      max-width: min(720px, 90vw);
+      width: auto;
+      height: auto;
+      filter:
+        drop-shadow(0 0 18px rgba(201,168,76,0.22))
+        drop-shadow(0 0 60px rgba(201,168,76,0.08));
+      animation: fadeIn 1.4s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Caption ── */
+    .caption-block {
+      margin-top: 1.6rem;
+      text-align: center;
+      width: 100%;
+      max-width: min(720px, 90vw);
+      animation: fadeIn 1.6s ease 0.3s both;
+    }
+
+    .caption-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      margin-bottom: 1rem;
+    }
+
+    .caption-line {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--silver-dim);
+      line-height: 2;
+      display: block;
+    }
+
+    .caption-line a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-dim);
+      padding-bottom: 1px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .caption-line a:hover {
+      color: var(--parchment);
+      border-color: var(--parchment);
+    }
+
+    /* ── Navigation ── */
+    .nav-strip {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeIn 1.8s ease 0.5s both;
+    }
+
+    .nav-btn {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      text-decoration: none;
+      border: 1px solid var(--gold-dim);
+      padding: 0.55rem 1.6rem;
+      position: relative;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      background: transparent;
+    }
+    .nav-btn:hover {
+      color: var(--parchment);
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.07);
+    }
+    .nav-btn::before, .nav-btn::after {
+      content: '';
+      position: absolute;
+      width: 5px; height: 5px;
+      border-color: var(--gold);
+      border-style: solid;
+    }
+    .nav-btn::before { top: -1px; left: -1px;  border-width: 1px 0 0 1px; }
+    .nav-btn::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+    .nav-sep {
+      width: 1px;
+      height: 22px;
+      background: var(--gold-dim);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <main class="page">
+
+    <img
+      class="painting-img"
+      src="OLG5A.JPG"
+      alt="Our Lady of the Galaxies — oil painting and carved wooden frame by Remi Kramer"
+    />
+
+    <div class="caption-block">
+      <div class="caption-rule"></div>
+      <span class="caption-line">Original oil painting and carved wooden frame by Remi Kramer &nbsp;&copy;&nbsp;Copyright 2026</span>
+      <span class="caption-line">
+        If you wish to view more paintings by Remi Kramer or wish to contact him please visit
+        <a href="https://remikramer.com" target="_blank" rel="noopener noreferrer">remikramer.com</a>
+      </span>
+    </div>
+
+    <nav class="nav-strip" aria-label="Page navigation">
+      <a class="nav-btn" href="index.html">Home</a>
+      <div class="nav-sep" aria-hidden="true"></div>
+      <a class="nav-btn" href="prayer.html">A Prayer</a>
+    </nav>
+
+  </main>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let W, H, stars = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function initStars(n = 280) {
+      stars = Array.from({ length: n }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.0 + 0.2,
+        alpha: Math.random() * 0.6 + 0.12,
+        speed: Math.random() * 0.003 + 0.001,
+        phase: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      for (const s of stars) {
+        const a = s.alpha * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(232,234,240,${a})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
